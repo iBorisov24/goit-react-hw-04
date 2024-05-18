@@ -1,0 +1,30 @@
+.form {
+  display: flex;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.btn {
+  display: block;
+  cursor: pointer;
+  padding: 10px 20px;
+  outline: transparent;
+  border-color: transparent;
+  background-color: orchid;
+  color: white;
+  border-radius: 10px;
+  transition: background-color 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.btn:hover {
+  background-color: coral;
+}
+.input {
+  padding: 10px 20px;
+  border-radius: 10px;
+  border-color: orchid;
+  outline: orchid;
+}
+.input:hover {
+  border-color: coral;
+}

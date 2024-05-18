@@ -1,5 +1,6 @@
 import { Formik, Field, Form } from "formik";
 import toast, { Toaster } from "react-hot-toast";
+import css from "./SearchBar.module.css";
 export default function SearchBar({ onSubmit }) {
   return (
     <Formik
@@ -13,13 +14,16 @@ export default function SearchBar({ onSubmit }) {
         }
       }}
     >
-      <Form>
+      <Form className={css.form}>
         <Field
           name="searchQuery"
           type="text"
           placeholder="Search images and photos"
+          className={css.input}
         />
-        <button type="submit">Search</button>
+        <button className={css.btn} type="submit">
+          Search
+        </button>
         <Toaster />
       </Form>
     </Formik>

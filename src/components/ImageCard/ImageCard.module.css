@@ -1,0 +1,16 @@
+.img {
+  border-radius: 5px;
+  animation: markup 6s infinite;
+}
+
+@keyframes markup {
+  0% {
+    box-shadow: 0 0 10px #fafafa;
+  }
+  50% {
+    box-shadow: 0 0 10px 5px orchid;
+  }
+  100% {
+    box-shadow: 0 0 10px #fafafa;
+  }
+}

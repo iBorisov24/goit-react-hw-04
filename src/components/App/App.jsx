@@ -6,7 +6,7 @@ import ImageGallery from "../ImageGallery/ImageGallery";
 import ErrorMesage from "../ErrorMessage/ErrorMessage";
 import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
 import toast, { Toaster } from "react-hot-toast";
-import ReactModal from "react-modal";
+import ImageModal from "../ImageModal/ImageModal";
 
 function App() {
   const [query, setQuery] = useState("");
@@ -14,7 +14,8 @@ function App() {
   const [page, setPage] = useState(1);
   const [loader, setLoader] = useState(false);
   const [error, setError] = useState(false);
-  const [IsOpen, setIsOpen] = useState(false);
+  const [isOpen, setisOpen] = useState(false);
+  const [imageInfo, setimageInfo] = useState("");
 
   useEffect(() => {
     const request = async () => {
@@ -40,33 +41,36 @@ function App() {
       }
     };
 
-    function openModal() {
-      setIsOpen(true);
-    }
-
-    function afterOpenModal() {
-      // references are now sync'd and can be accessed.
-      subtitle.style.color = "#f00";
-    }
-
-    function closeModal() {
-      setIsOpen(false);
-    }
-
     if (query !== "") request();
   }, [query, page]);
+
+  const openModal = (url) => {
+    setisOpen(true);
+    setimageInfo(url);
+  };
+
+  const closeModal = () => {
+    setisOpen(false);
+    setimageInfo("");
+  };
 
   const onSubmit = (value) => {
     setCollection([]);
     setQuery(value);
   };
-  const onLoadMore = () => {
-    setPage(page + 1);
-  };
+
+  const onLoadMore = () => setPage(page + 1);
+
   return (
     <>
       <SearchBar onSubmit={onSubmit} />
-      <ImageGallery gallery={collection} />
+      <ImageGallery gallery={collection} onClickFoo={openModal} />
+      <ImageModal
+        openModal={openModal}
+        closeModal={closeModal}
+        imageInfo={imageInfo}
+        isOpen={isOpen}
+      />
       {loader && <Loader />}
       {error && <ErrorMesage />}
       {collection.length > 0 && <LoadMoreBtn clickBtn={onLoadMore} />}
